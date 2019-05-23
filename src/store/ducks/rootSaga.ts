@@ -6,7 +6,7 @@ import { loginSuccess } from "./Login/saga";
 export default function* rootSaga() {
   const effects = [];
 
-  effects.push(LoginTypes.SUCCESS, loginSuccess);
+  effects.push(takeLatest(LoginTypes.SUCCESS, loginSuccess));
 
   return yield all(effects);
 }

@@ -16,20 +16,17 @@ const tron = new Reactotron();
 
 const sagaMonitor = tron.getCreateSagaMonitor();
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
-sagaMiddleware.run(rootSaga);
 
 const middlewares = [];
 middlewares.push(sagaMiddleware);
 
-const applied = applyMiddleware(...middlewares);
-
-const composer = __DEV__
-  ? compose(
-      applied,
-      tron.getCreateEnhancer()
-    )
-  : applied;
+const composer = compose(
+  applyMiddleware(...middlewares),
+  tron.getCreateEnhancer()
+);
 
 const store: Store<ApplicationState> = createStore(rootReducer, composer);
+
+sagaMiddleware.run(rootSaga);
 
 export default store;

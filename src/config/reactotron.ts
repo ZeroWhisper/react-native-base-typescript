@@ -18,6 +18,7 @@ export default class RT {
       .use(sagaPlugin({}))
       .connect();
 
+    this.reactotron.clear();
     console.log = this.reactotron.log;
   };
 

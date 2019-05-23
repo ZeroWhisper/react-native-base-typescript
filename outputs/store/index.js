@@ -1,16 +1,15 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
-import Reactotron from "./../config/ReactotronConfig";
+import Reactotron from "./../config/reactotron";
 import rootReducer from "./ducks/rootReducer";
 import rootSaga from "./ducks/rootSaga";
-const sagaMiddleware = createSagaMiddleware();
-sagaMiddleware.run(rootSaga);
+const tron = new Reactotron();
+const sagaMonitor = tron.getCreateSagaMonitor();
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 const middlewares = [];
 middlewares.push(sagaMiddleware);
-const applied = applyMiddleware(middlewares);
-const composer = __DEV__
-    ? compose(applied, Reactotron.createEnhancer())
-    : applied;
+const composer = compose(applyMiddleware(...middlewares), tron.getCreateEnhancer());
 const store = createStore(rootReducer, composer);
+sagaMiddleware.run(rootSaga);
 export default store;
 //# sourceMappingURL=index.js.map

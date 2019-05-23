@@ -1,6 +1,6 @@
 import { action } from "typesafe-actions";
 import { LoginTypes } from "./types";
-export const loginRequest = (payload) => action(LoginTypes.REQUEST, payload);
-export const loginSuccess = (payload) => action(LoginTypes.SUCCESS, payload);
-export const loginFailure = (payload) => action(LoginTypes.FAILURE, payload);
+export const loginRequest = () => action(LoginTypes.REQUEST);
+export const loginSuccess = (data) => action(LoginTypes.SUCCESS, { data });
+export const loginFailure = () => action(LoginTypes.FAILURE);
 //# sourceMappingURL=actions.js.map

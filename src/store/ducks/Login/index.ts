@@ -1,4 +1,4 @@
-import { LoginState, Login, LoginTypes } from "./types";
+import { LoginState, LoginTypes } from "./types";
 import { Reducer } from "redux";
 
 const INITIAL_STATE: LoginState = {
@@ -11,9 +11,9 @@ const reducer: Reducer<LoginState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LoginTypes.REQUEST:
       return { ...INITIAL_STATE, loading: true };
-    case LoginTypes.REQUEST:
+    case LoginTypes.SUCCESS:
       return { ...state, loading: false, data: action.payload };
-    case LoginTypes.REQUEST:
+    case LoginTypes.FAILURE:
       return { ...INITIAL_STATE, error: true };
     default:
       return state;

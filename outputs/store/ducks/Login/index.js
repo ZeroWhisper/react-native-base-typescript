@@ -8,9 +8,9 @@ const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LoginTypes.REQUEST:
             return Object.assign({}, INITIAL_STATE, { loading: true });
-        case LoginTypes.REQUEST:
+        case LoginTypes.SUCCESS:
             return Object.assign({}, state, { loading: false, data: action.payload });
-        case LoginTypes.REQUEST:
+        case LoginTypes.FAILURE:
             return Object.assign({}, INITIAL_STATE, { error: true });
         default:
             return state;
